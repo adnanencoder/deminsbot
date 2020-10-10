@@ -16,7 +16,8 @@ from discord.utils import get
 from discord.voice_client import VoiceClient
 from os import system
 from googleapiclient.discovery import build
-
+import googletrans
+from googletrans import Translator
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -85,6 +86,11 @@ async def wiki(ctx):
     search = discord.Embed(title="Demins search...", description=wiki_summary(important_words),colour=discord.Colour.purple())
     await ctx.channel.send(content=None, embed = search)
 
+@bot.command()
+async def trans(ctx,lang,*,args):
+    t = Translator()
+    a = t.translate(args, dest=lang)
+    await ctx.send(a.text)
 
 
 
